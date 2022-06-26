@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
+import { ChartData, ChartOptions } from 'chart.js';
 
 export const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
+export const data: ChartData = {
   labels,
   datasets: [
     {
@@ -29,18 +30,22 @@ export const data = {
   ],
 };
 
-export const options = {
+export const options: ChartOptions = {
   // responsive: true,
   // maintainAspectRatio: false,
+
   interaction: {
     mode: 'index' as const,
     intersect: false,
   },
-  stacked: false,
+  // stacked: false,
   plugins: {
+    legend: {
+      display: true,
+    },
     // title: {
     //   display: true,
-    //   text: title,
+    //   text: 'HELLO?',
     // },
   },
   scales: {
