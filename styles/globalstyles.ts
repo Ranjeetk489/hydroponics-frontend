@@ -24,3 +24,7 @@ export const Input = styled.input`
     background-color: rgb(106, 184, 139);
   }
 `;
+
+export const SubmitButton = styled.button<{ isValid: boolean }>`
+  background-color: ${({ isValid }) => isValid && 'rgb(106, 184, 139)'};
+`;
