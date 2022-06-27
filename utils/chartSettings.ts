@@ -3,7 +3,7 @@ import { ChartData, ChartOptions } from 'chart.js';
 
 export const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data: ChartData = {
+export const data = {
   labels,
   datasets: [
     {
@@ -30,8 +30,8 @@ export const data: ChartData = {
   ],
 };
 
-export const options: ChartOptions = {
-  // responsive: true,
+export const options = {
+  responsive: true,
   // maintainAspectRatio: false,
 
   interaction: {

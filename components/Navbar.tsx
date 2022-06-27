@@ -1,48 +1,47 @@
-import styled from 'styled-components';
+import styled, { StyledComponent, StyledComponentPropsWithRef } from 'styled-components';
 import Link from 'next/link';
-import Image from 'next/image';
-import logo from '../assets/images/hydroponics-logowebp.webp';
+import { MainLogo } from './MainLogo';
+import { useEffect } from 'react';
+import { Router, useRouter } from 'next/router';
 
 const Nav = styled.div`
-  /* max-width: 200px; */
-  /* margin: auto; */
   display: flex;
   gap: 1rem;
-  /* justify-content: center; */
-  /* margin-top: 2rem; */
 `;
-// const StyledLink = styled.a``;
 
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   align-items: flex-start;
-  /* justify-items: center; */
   padding: 2rem;
 `;
 
+const StyledLinkLabel = styled.a<{ isActive: boolean }>`
+  border-bottom: ${({ isActive }) => isActive && '1px solid rgb(106, 184, 139)'};
+`;
+
 const Navbar = () => {
+  const { pathname } = useRouter();
+
   return (
     <HeaderWrapper>
-      <div style={{ maxWidth: '30%' }}>
-        <Image src={logo} alt="Hydroponics logo"></Image>
-      </div>
+      <MainLogo />
       <Nav>
         <Link href="/" passHref>
-          Home
+          <StyledLinkLabel isActive={pathname === '/'}>Home</StyledLinkLabel>
         </Link>
         <Link href="/user-dashboard" passHref>
-          User
+          <StyledLinkLabel isActive={pathname === '/user-dashboard'}>User</StyledLinkLabel>
         </Link>
         <Link href="/admin-dashboard" passHref>
-          Admin
+          <StyledLinkLabel isActive={pathname === '/admin-dashboard'}>Admin</StyledLinkLabel>
         </Link>
         <Link href="/signin" passHref>
-          Login
+          <StyledLinkLabel isActive={pathname === '/signin'}>Login</StyledLinkLabel>
         </Link>
         <Link href="/signup" passHref>
-          Register
+          <StyledLinkLabel isActive={pathname === '/signup'}>Register</StyledLinkLabel>
         </Link>
       </Nav>
     </HeaderWrapper>

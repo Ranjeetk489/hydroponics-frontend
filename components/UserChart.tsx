@@ -57,7 +57,7 @@ ChartJS.register(
 );
 
 const StyledLine = styled(Line)`
-  padding: 0 1rem;
+  padding: 0 2rem;
   /* width: 100%; */
   /* min-height: 400px; */
   /* margin: auto; */
