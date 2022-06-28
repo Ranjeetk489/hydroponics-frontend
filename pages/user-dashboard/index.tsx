@@ -1,16 +1,25 @@
 import Navbar from '../../components/Navbar';
 import PageHeader from '../../components/PageHeader';
 import UserChart from '../../components/UserChart';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-interface DashboardProps {}
+const UserDashboard = () => {
+  const currentUser = useContext(CurrentUserContext);
+  const router = useRouter();
 
-const UserDashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
+  useEffect(() => {
+    if (!currentUser.isLoggedIn) router.push('/signin');
+  }, [router, currentUser]);
   return (
-    <>
-      <Navbar></Navbar>
-      <PageHeader>User Dashboard</PageHeader>
-      <UserChart></UserChart>
-    </>
+    currentUser.isLoggedIn && (
+      <>
+        <Navbar></Navbar>
+        <PageHeader>User Dashboard</PageHeader>
+        <UserChart></UserChart>
+      </>
+    )
   );
 };
 

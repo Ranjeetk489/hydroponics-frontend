@@ -1,8 +1,9 @@
-import styled, { StyledComponent, StyledComponentPropsWithRef } from 'styled-components';
+import styled from 'styled-components';
 import Link from 'next/link';
 import { MainLogo } from './MainLogo';
-import { useEffect } from 'react';
-import { Router, useRouter } from 'next/router';
+import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 const Nav = styled.div`
   display: flex;
@@ -21,30 +22,40 @@ const StyledLinkLabel = styled.a<{ isActive: boolean }>`
   border-bottom: ${({ isActive }) => isActive && '1px solid rgb(106, 184, 139)'};
 `;
 
-const Navbar = () => {
+const Navbar = (props: any) => {
   const { pathname } = useRouter();
+  const currentUser = useContext(CurrentUserContext);
 
   return (
-    <HeaderWrapper>
-      <MainLogo />
-      <Nav>
-        <Link href="/" passHref>
-          <StyledLinkLabel isActive={pathname === '/'}>Home</StyledLinkLabel>
-        </Link>
-        <Link href="/user-dashboard" passHref>
-          <StyledLinkLabel isActive={pathname === '/user-dashboard'}>User</StyledLinkLabel>
-        </Link>
-        <Link href="/admin-dashboard" passHref>
-          <StyledLinkLabel isActive={pathname === '/admin-dashboard'}>Admin</StyledLinkLabel>
-        </Link>
-        <Link href="/signin" passHref>
-          <StyledLinkLabel isActive={pathname === '/signin'}>Login</StyledLinkLabel>
-        </Link>
-        <Link href="/signup" passHref>
-          <StyledLinkLabel isActive={pathname === '/signup'}>Register</StyledLinkLabel>
-        </Link>
-      </Nav>
-    </HeaderWrapper>
+    <>
+      {currentUser.isLoggedIn && <div style={{ textAlign: 'center' }}>{`Logged in as ${currentUser.email}`}</div>}
+      <HeaderWrapper>
+        <MainLogo />
+        <Nav>
+          <Link href="/" passHref>
+            <StyledLinkLabel isActive={pathname === '/'}>Home</StyledLinkLabel>
+          </Link>
+          <Link href="/user-dashboard" passHref>
+            <StyledLinkLabel isActive={pathname === '/user-dashboard'}>User</StyledLinkLabel>
+          </Link>
+          {currentUser.isAdmin && (
+            <Link href="/admin-dashboard" passHref>
+              <StyledLinkLabel isActive={pathname === '/admin-dashboard'}>Admin</StyledLinkLabel>
+            </Link>
+          )}
+          <Link href="/signin" passHref>
+            <StyledLinkLabel onClick={(e) => props.handleLogout(e)} isActive={pathname === '/signin'}>
+              {currentUser.isLoggedIn ? 'Logout' : 'Login'}
+            </StyledLinkLabel>
+          </Link>
+          {!currentUser.isLoggedIn && (
+            <Link href="/signup" passHref>
+              <StyledLinkLabel isActive={pathname === '/signup'}>Register</StyledLinkLabel>
+            </Link>
+          )}
+        </Nav>
+      </HeaderWrapper>
+    </>
   );
 };
 

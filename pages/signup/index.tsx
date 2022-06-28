@@ -1,8 +1,9 @@
 import { Input, StyledLabel, SubmitButton } from '../../styles/globalstyles';
 import Navbar from '../../components/Navbar';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useInputsAndValidation } from '../../hooks/useInputsAndValidation';
 import { register as registerUser } from '../../utils/auth';
+import { useRouter } from 'next/router';
 
 interface RegisterInputs {
   email: string;
@@ -10,8 +11,9 @@ interface RegisterInputs {
   confirm: string;
 }
 
-const Signup = () => {
-  const { handleChange, errors, inputs, isValid, resetForm, setErrors, setInputs, setIsValid } = useInputsAndValidation();
+const Signup = (props: any) => {
+  const { handleChange, inputs, isValid, resetForm } = useInputsAndValidation();
+  const router = useRouter();
   const registerInputs = inputs as RegisterInputs;
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -21,11 +23,12 @@ const Signup = () => {
         email: email,
         password: password,
       })
-        .then((res) => {
-          // todo - navigate to Login / Homepage
+        .then((user) => {
+          router.push('/');
+          // set state to logged in
           // todo - add success message
+          props.handleRegister(user);
           resetForm();
-          console.log(res);
         })
         .catch((err) => console.log(err));
     } else {
@@ -36,7 +39,7 @@ const Signup = () => {
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar handleLogout={props.handleLogout}></Navbar>
       <form onSubmit={handleSubmit} className="form_type_onboarding">
         <StyledLabel>
           Email

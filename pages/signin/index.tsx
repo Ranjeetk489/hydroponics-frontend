@@ -1,5 +1,4 @@
-import { FormEvent, useEffect } from 'react';
-import styled from 'styled-components';
+import { FormEvent } from 'react';
 import Navbar from '../../components/Navbar';
 import { useInputsAndValidation } from '../../hooks/useInputsAndValidation';
 import { Input, StyledLabel, SubmitButton } from '../../styles/globalstyles';
@@ -11,27 +10,26 @@ interface LoginInputs {
   password: string;
 }
 
-const Signin = () => {
+const Signin = (props: any) => {
   const router = useRouter();
-  const { handleChange, errors, inputs, isValid, resetForm, setErrors, setInputs, setIsValid } = useInputsAndValidation();
+  const { handleChange, inputs, isValid, resetForm } = useInputsAndValidation();
   const loginInputs = inputs as LoginInputs;
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     const { email, password } = loginInputs;
     requestLogin({ email, password })
-      .then((user) => {
-        // redirect to home page
-        // set user context
+      .then(() => {
+        // set user context logged in
         // set JWT in cookies
+        props.handleLogin({ email });
         resetForm();
         router.push('/');
-        console.log(user);
       })
       .catch((err) => console.log(err));
   };
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar handleLogout={props.handleLogout}></Navbar>
       <form onSubmit={handleSubmit} className="form_type_onboarding">
         <StyledLabel>
           Email

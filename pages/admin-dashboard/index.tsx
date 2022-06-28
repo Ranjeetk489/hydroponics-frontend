@@ -1,18 +1,26 @@
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import PageHeader from '../../components/PageHeader';
 import UserChart from '../../components/UserChart';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-interface DashboardProps {}
+const AdminDashboard = () => {
+  const currentUser = useContext(CurrentUserContext);
+  const router = useRouter();
 
-const AdminDashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
-  // console.log(location.pathname);
+  useEffect(() => {
+    if (!currentUser.isAdmin) router.push('/');
+  }, [currentUser, router]);
 
   return (
-    <>
-      <Navbar></Navbar>
-      <PageHeader>Admin Dasbhoard</PageHeader>
-      <UserChart></UserChart>
-    </>
+    currentUser.isAdmin && (
+      <>
+        <Navbar></Navbar>
+        <PageHeader>Admin Dasbhoard</PageHeader>
+        <UserChart></UserChart>
+      </>
+    )
   );
 };
 
