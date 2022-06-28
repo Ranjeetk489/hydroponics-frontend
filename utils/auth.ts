@@ -1,4 +1,4 @@
-const BASE_URL = 'https://localhost:3000';
+const BASE_URL = 'https://0aa0-176-228-177-103.eu.ngrok.io';
 
 interface IUserAuth {
   email: string;

@@ -26,5 +26,11 @@ export const Input = styled.input`
 `;
 
 export const SubmitButton = styled.button<{ isValid: boolean }>`
+  border: none;
+  line-height: 22px;
+  cursor: pointer;
   background-color: ${({ isValid }) => isValid && 'rgb(106, 184, 139)'};
+  &:disabled {
+    background-color: rgba(106, 184, 139, 0.4);
+  }
 `;

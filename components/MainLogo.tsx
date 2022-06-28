@@ -2,6 +2,7 @@ import Image from 'next/image';
 import logo from '../assets/images/hydroponics-logowebp.webp';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const LogoWrapper = styled.div`
   max-width: 200px;
@@ -12,11 +13,13 @@ const LogoWrapper = styled.div`
 `;
 
 export const MainLogo = () => {
+  // const [logoSrc, setLogoSrc] = useState('/../assets/images/hydroponics-logowebp.webp');
+
   return (
     <LogoWrapper>
       <Link href="/" passHref>
         <a>
-          <Image src={logo} alt="Hydroponics logo"></Image>
+          <Image priority src={logo} alt="Hydroponics logo"></Image>
         </a>
       </Link>
     </LogoWrapper>

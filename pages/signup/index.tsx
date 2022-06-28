@@ -2,6 +2,7 @@ import { Input, StyledLabel, SubmitButton } from '../../styles/globalstyles';
 import Navbar from '../../components/Navbar';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useInputsAndValidation } from '../../hooks/useInputsAndValidation';
+import { register as registerUser } from '../../utils/auth';
 
 interface RegisterInputs {
   email: string;
@@ -14,6 +15,23 @@ const Signup = () => {
   const registerInputs = inputs as RegisterInputs;
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    const { email, password, confirm } = registerInputs;
+    if (password === confirm) {
+      registerUser({
+        email: email,
+        password: password,
+      })
+        .then((res) => {
+          // todo - navigate to Login / Homepage
+          // todo - add success message
+          resetForm();
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // todo - add failure message
+      console.log("Passwords don't match.");
+    }
   };
 
   return (
