@@ -15,7 +15,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   gap: 1rem;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 2.5rem 2rem 0;
 `;
 
 const StyledLinkLabel = styled.a<{ isActive: boolean }>`
@@ -32,22 +32,39 @@ const Navbar = (props: any) => {
       <HeaderWrapper>
         <MainLogo />
         <Nav>
-          <Link href="/" passHref>
-            <StyledLinkLabel isActive={pathname === '/'}>Home</StyledLinkLabel>
-          </Link>
-          <Link href="/user-dashboard" passHref>
-            <StyledLinkLabel isActive={pathname === '/user-dashboard'}>User</StyledLinkLabel>
-          </Link>
+          {/* Home link */}
+          {currentUser.isLoggedIn && (
+            <Link href="/" passHref>
+              <StyledLinkLabel isActive={pathname === '/'}>Home</StyledLinkLabel>
+            </Link>
+          )}
+          {/* User dashboard link */}
+          {currentUser.isLoggedIn && (
+            <Link href="/user-dashboard" passHref>
+              <StyledLinkLabel isActive={pathname === '/user-dashboard'}>User</StyledLinkLabel>
+            </Link>
+          )}
+          {/* Admin link */}
           {currentUser.isAdmin && (
             <Link href="/admin-dashboard" passHref>
               <StyledLinkLabel isActive={pathname === '/admin-dashboard'}>Admin</StyledLinkLabel>
             </Link>
           )}
-          <Link href="/signin" passHref>
-            <StyledLinkLabel onClick={(e) => props.handleLogout(e)} isActive={pathname === '/signin'}>
-              {currentUser.isLoggedIn ? 'Logout' : 'Login'}
-            </StyledLinkLabel>
-          </Link>
+          {/* Log in link */}
+          {!currentUser.isLoggedIn && (
+            <Link href="/signin" passHref>
+              <StyledLinkLabel isActive={pathname === '/signin'}>Login</StyledLinkLabel>
+            </Link>
+          )}
+          {/* Log out link */}
+          {currentUser.isLoggedIn && (
+            <Link href="/signin" passHref>
+              <StyledLinkLabel onClick={(e) => props.handleLogout(e)} isActive={pathname === '/signin'}>
+                Logout
+              </StyledLinkLabel>
+            </Link>
+          )}
+          {/* Register link */}
           {!currentUser.isLoggedIn && (
             <Link href="/signup" passHref>
               <StyledLinkLabel isActive={pathname === '/signup'}>Register</StyledLinkLabel>

@@ -2,6 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+  html {
+    font-size: 62.5%;
+  }
   .form_type_onboarding {
     display: flex;
     flex-direction: column;
@@ -23,6 +26,12 @@ export const Input = styled.input`
   &:focus {
     background-color: rgb(106, 184, 139);
   }
+`;
+
+export const StyledHeader = styled.h1`
+  margin: 3rem 0;
+  text-align: center;
+  font-size: 2.2rem;
 `;
 
 export const SubmitButton = styled.button<{ isValid: boolean }>`

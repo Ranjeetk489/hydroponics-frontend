@@ -1,4 +1,4 @@
-const BASE_URL = 'https://0aa0-176-228-177-103.eu.ngrok.io';
+const BASE_URL = 'https://d613-176-228-177-103.eu.ngrok.io';
 
 interface IUserAuth {
   email: string;

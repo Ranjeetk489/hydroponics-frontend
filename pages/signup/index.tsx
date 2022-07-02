@@ -1,4 +1,4 @@
-import { Input, StyledLabel, SubmitButton } from '../../styles/globalstyles';
+import { Input, StyledHeader, StyledLabel, SubmitButton } from '../../styles/globalstyles';
 import Navbar from '../../components/Navbar';
 import { FormEvent } from 'react';
 import { useInputsAndValidation } from '../../hooks/useInputsAndValidation';
@@ -10,6 +10,8 @@ interface RegisterInputs {
   password: string;
   confirm: string;
 }
+
+// TODO: Implement custom error messages
 
 const Signup = (props: any) => {
   const { handleChange, inputs, isValid, resetForm } = useInputsAndValidation();
@@ -26,7 +28,7 @@ const Signup = (props: any) => {
         .then((user) => {
           router.push('/');
           // set state to logged in
-          // todo - add success message
+          // TODO: add success message
           props.handleRegister(user);
           resetForm();
         })
@@ -40,6 +42,7 @@ const Signup = (props: any) => {
   return (
     <>
       <Navbar handleLogout={props.handleLogout}></Navbar>
+      <StyledHeader>Sign up</StyledHeader>
       <form onSubmit={handleSubmit} className="form_type_onboarding">
         <StyledLabel>
           Email

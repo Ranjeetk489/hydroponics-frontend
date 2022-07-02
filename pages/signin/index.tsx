@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import Navbar from '../../components/Navbar';
 import { useInputsAndValidation } from '../../hooks/useInputsAndValidation';
-import { Input, StyledLabel, SubmitButton } from '../../styles/globalstyles';
+import { Input, StyledHeader, StyledLabel, SubmitButton } from '../../styles/globalstyles';
 import { login as requestLogin } from '../../utils/auth';
 import { useRouter } from 'next/router';
 
@@ -9,6 +9,8 @@ interface LoginInputs {
   email: string;
   password: string;
 }
+
+// TODO: Implement custom error messages
 
 const Signin = (props: any) => {
   const router = useRouter();
@@ -30,6 +32,7 @@ const Signin = (props: any) => {
   return (
     <>
       <Navbar handleLogout={props.handleLogout}></Navbar>
+      <StyledHeader>Log in</StyledHeader>
       <form onSubmit={handleSubmit} className="form_type_onboarding">
         <StyledLabel>
           Email

@@ -5,16 +5,16 @@ import UserChart from '../components/UserChart.tsx';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
-import PageHeader from '../components/PageHeader';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import { useContext, useEffect } from 'react';
+import { StyledHeader } from '../styles/globalstyles';
 
 export default function Home(props) {
   const currentUser = useContext(CurrentUserContext);
   const router = useRouter();
 
   useEffect(() => {
-    if (!currentUser.isLoggedIn) router.push('/signin');
+    if (!currentUser.isLoggedIn) router.replace('/signin');
   }, [router, currentUser]);
 
   return (
@@ -24,7 +24,7 @@ export default function Home(props) {
           <title>Hydroponics Dashboard</title>
         </Head>
         <Navbar />
-        <PageHeader>General Chart</PageHeader>
+        <StyledHeader>Welcome to Hydroponics!</StyledHeader>
         <UserChart title="General chart"></UserChart>
       </>
     )

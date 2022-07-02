@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   const [currentUser, setCurrentUser] = useState({ isLoggedIn: false, email: null });
   const handleLogin = useCallback(
     (user) => {
-      setCurrentUser({ ...currentUser, email: user.email, isLoggedIn: true });
+      setCurrentUser({ ...currentUser, email: user.email, isLoggedIn: true, isAdmin: false });
     },
     [currentUser]
   );
