@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 interface RegisterInputs {
   email: string;
-  password: string;
+  phoneNumber: string;
   confirm: string;
 }
 
@@ -19,45 +19,40 @@ const Signup = (props: any) => {
   const registerInputs = inputs as RegisterInputs;
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const { email, password, confirm } = registerInputs;
-    if (password === confirm) {
-      registerUser({
-        email: email,
-        password: password,
+    const { email, phoneNumber, confirm } = registerInputs;
+    registerUser({
+      email: email,
+      phoneNumber: phoneNumber,
+    })
+      .then((user) => {
+        router.push('/');
+        // set state to logged in
+        // TODO: add success message
+        props.handleRegister(user);
+        resetForm();
       })
-        .then((user) => {
-          router.push('/');
-          // set state to logged in
-          // TODO: add success message
-          props.handleRegister(user);
-          resetForm();
-        })
-        .catch((err) => console.log(err));
-    } else {
-      // todo - add failure message
-      console.log("Passwords don't match.");
-    }
+      .catch((err) => console.log(err));
   };
 
   return (
     <>
       <Navbar handleLogout={props.handleLogout}></Navbar>
       <StyledHeader>Sign up</StyledHeader>
-      <form onSubmit={handleSubmit} className="form_type_onboarding">
+      <form onSubmit={handleSubmit} className='form_type_onboarding'>
         <StyledLabel>
           Email
-          <Input name="email" minLength={2} required={true} value={registerInputs.email || ''} onChange={handleChange} type="email"></Input>
+          <Input name='email' minLength={2} required={true} value={registerInputs.email || ''} onChange={handleChange} type='email'></Input>
         </StyledLabel>
         <StyledLabel>
-          Passowrd
-          <Input name="password" minLength={6} required={true} value={registerInputs.password || ''} onChange={handleChange} type="password"></Input>
+          Phone Number
+          <Input name='phoneNumber' minLength={6} required={true} value={registerInputs.phoneNumber || ''} onChange={handleChange} type='tel'></Input>
         </StyledLabel>
-        <StyledLabel>
+        {/* <StyledLabel>
           Confirm password
-          <Input name="confirm" minLength={6} required={true} value={registerInputs.confirm || ''} onChange={handleChange} type="password"></Input>
-        </StyledLabel>
+          <Input name='confirm' minLength={6} required={true} value={registerInputs.confirm || ''} onChange={handleChange} type='tel'></Input>
+        </StyledLabel> */}
 
-        <SubmitButton disabled={!isValid} isValid={isValid} type="submit">
+        <SubmitButton disabled={!isValid} isValid={isValid} type='submit'>
           Register
         </SubmitButton>
       </form>
