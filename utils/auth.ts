@@ -1,6 +1,6 @@
-const BASE_URL = 'https://39ad-176-228-28-109.eu.ngrok.io';
+import { BASE_URL } from '../utils/constants';
 
-interface IUserAuth {
+export interface IUserAuth {
   email: string;
   phoneNumber: string;
 }
@@ -35,4 +35,4 @@ const login = ({ email, phoneNumber }: IUserAuth): Promise<unknown> => {
 //   }).then(handleResponse);
 // };
 
-export { login, register };
+export { login, register, handleResponse };

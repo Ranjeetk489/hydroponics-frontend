@@ -4,15 +4,16 @@ import { GlobalStyles } from '../styles/globalstyles';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function MyApp({ Component, pageProps }) {
-  const [currentUser, setCurrentUser] = useState({ isLoggedIn: false, email: null });
+  const [currentUser, setCurrentUser] = useState({ isLoggedIn: false, phoneNumber: null, email: null });
   const handleLogin = useCallback(
     (user) => {
-      setCurrentUser({ ...currentUser, email: user.email, isLoggedIn: true, isAdmin: false });
+      const { email, phoneNumber } = user;
+      setCurrentUser({ ...currentUser, email, phoneNumber, isLoggedIn: true, isAdmin: false });
     },
     [currentUser]
   );
   const handleLogout = () => {
-    setCurrentUser({ ...currentUser, email: null, isLoggedIn: false });
+    setCurrentUser({ ...currentUser, phoneNumber: null, email: null, isLoggedIn: false });
   };
   const handleRegister = () => {};
   return (

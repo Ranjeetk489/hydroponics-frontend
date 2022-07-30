@@ -19,7 +19,7 @@ const Signup = (props: any) => {
   const registerInputs = inputs as RegisterInputs;
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const { email, phoneNumber, confirm } = registerInputs;
+    const { email, phoneNumber /* , confirm */ } = registerInputs;
     registerUser({
       email: email,
       phoneNumber: phoneNumber,

@@ -23,7 +23,7 @@ const Signin = (props: any) => {
       .then(() => {
         // set user context logged in
         // set JWT in cookies
-        props.handleLogin({ email });
+        props.handleLogin({ email, phoneNumber });
         resetForm();
         router.push('/');
       })
