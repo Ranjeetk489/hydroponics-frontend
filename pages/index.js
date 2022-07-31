@@ -25,7 +25,7 @@ export default function Home(props) {
         </Head>
         <Navbar />
         <StyledHeader>Welcome to Hydroponics!</StyledHeader>
-        <UserChart title="General chart"></UserChart>
+        {/* <UserChart title="General chart"></UserChart> */}
       </>
     )
   );

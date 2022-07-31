@@ -1,30 +1,37 @@
-import { faker } from '@faker-js/faker';
+// import { faker } from '@faker-js/faker';
 // import { ChartData, ChartOptions } from 'chart.js';
 
-export const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+export const labels = ['XX/XX', 'XX/XX', 'XX/XX', 'XX/XX', 'XX/XX', 'XX/XX', 'XX/XX'];
 
-export const data = {
+export const initialData = {
   labels,
   datasets: [
     {
       label: 'Temperature',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      data: ['0', '0', '0', '0', '0', '0', '0'],
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
       yAxisID: 'y',
     },
     {
       label: 'Humidity',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-      yAxisID: 'y1',
+      data: ['0', '0', '0', '0', '0', '0', '0'],
+      borderColor: 'rgb(233, 127, 22)',
+      backgroundColor: 'rgba(233, 127, 22, 0.5)',
+      yAxisID: 'y',
     },
     {
       label: 'PH',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(74, 235, 53)',
-      backgroundColor: 'rgba(74, 235, 53, 0.5)',
+      data: ['0', '0', '0', '0', '0', '0', '0'],
+      borderColor: 'rgb(39, 68, 216)',
+      backgroundColor: 'rgba(39, 68, 216, 0.5)',
+      yAxisID: 'y',
+    },
+    {
+      label: 'EC',
+      data: ['0', '0', '0', '0', '0', '0', '0'],
+      borderColor: 'rgb(234, 240, 67)',
+      backgroundColor: 'rgba(234, 240, 67, 0.5)',
       yAxisID: 'y',
     },
   ],
