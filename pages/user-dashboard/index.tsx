@@ -25,7 +25,9 @@ const UserDashboard = () => {
       .then((data) => {
         if (Array.isArray(data)) {
           const imageArray = data.reduce((acc, message) => {
-            if (message.imageUrl) acc.push(message.imageUrl);
+            const { imageUrl, dateReceived } = message;
+            console.log(message);
+            if (imageUrl) acc.push({ imageUrl, dateReceived });
             return acc;
           }, []);
           setCropData(imageArray);
@@ -73,12 +75,12 @@ const UserDashboard = () => {
         <Navbar></Navbar>
         <StyledHeader>User Dashboard</StyledHeader>
         <UserChart chartData={chartData}></UserChart>
+        <StyledHeader>Image Uploads</StyledHeader>
         <StyledUl>
-          {cropData.map((url, i) => (
-            <li key={i}>
-              <StyledImageContainer>
-                <Image objectFit='cover' width={'100%'} height={'100%'} src={url} alt='user uploaded image'></Image>
-              </StyledImageContainer>
+          {cropData.map(({ imageUrl, dateReceived }) => (
+            <li key={dateReceived + imageUrl}>
+              <Image quality={100} objectFit='cover' width={'1600'} height={'900'} src={imageUrl} alt='user uploaded image'></Image>
+              <ImageSentDateTag>{dateReceived.slice(0, 10)}</ImageSentDateTag>
             </li>
           ))}
         </StyledUl>
@@ -86,6 +88,13 @@ const UserDashboard = () => {
     )
   );
 };
+
+const ImageSentDateTag = styled.span`
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  text-align: center;
+`;
 
 const StyledUl = styled.ul`
   padding: 0;
@@ -99,9 +108,12 @@ const StyledUl = styled.ul`
   li {
     overflow: hidden;
     list-style: none;
+    width: 100%;
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
   }
 `;
-
-const StyledImageContainer = styled.div``;
 
 export default UserDashboard;
