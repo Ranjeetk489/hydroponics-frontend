@@ -1,59 +1,51 @@
-// import { faker } from '@faker-js/faker';
-// import { ChartData, ChartOptions } from 'chart.js';
+import type { ChartData, ChartOptions } from 'chart.js';
 
-export const labels = ['XX/XX', 'XX/XX', 'XX/XX', 'XX/XX', 'XX/XX', 'XX/XX', 'XX/XX'];
+export const labels = ['MM/DD', 'MM/DD', 'MM/DD', 'MM/DD', 'MM/DD', 'MM/DD', 'MM/DD'];
 
-export const initialData = {
+export const initialData: ChartData<'line'> = {
   labels,
   datasets: [
     {
       label: 'Temperature',
-      data: ['0', '0', '0', '0', '0', '0', '0'],
+      data: [0, 0, 0, 0, 0, 0, 0],
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
       yAxisID: 'y',
     },
     {
       label: 'Humidity',
-      data: ['0', '0', '0', '0', '0', '0', '0'],
+      data: [0, 0, 0, 0, 0, 0, 0],
       borderColor: 'rgb(233, 127, 22)',
       backgroundColor: 'rgba(233, 127, 22, 0.5)',
-      yAxisID: 'y',
+      yAxisID: 'y1',
     },
     {
       label: 'PH',
-      data: ['0', '0', '0', '0', '0', '0', '0'],
+      data: [0, 0, 0, 0, 0, 0, 0],
       borderColor: 'rgb(39, 68, 216)',
       backgroundColor: 'rgba(39, 68, 216, 0.5)',
-      yAxisID: 'y',
+      yAxisID: 'y2',
     },
     {
       label: 'EC',
-      data: ['0', '0', '0', '0', '0', '0', '0'],
+      data: [0, 0, 0, 0, 0, 0, 0],
       borderColor: 'rgb(234, 240, 67)',
       backgroundColor: 'rgba(234, 240, 67, 0.5)',
-      yAxisID: 'y',
+      yAxisID: 'y3',
     },
   ],
 };
 
-export const options = {
+export const options: ChartOptions<'line'> = {
   responsive: true,
-  // maintainAspectRatio: false,
-
   interaction: {
     mode: 'index' as const,
     intersect: false,
   },
-  // stacked: false,
   plugins: {
     legend: {
       display: true,
     },
-    // title: {
-    //   display: true,
-    //   text: 'HELLO?',
-    // },
   },
   scales: {
     y: {

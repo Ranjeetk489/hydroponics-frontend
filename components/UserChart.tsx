@@ -27,8 +27,9 @@ import {
   Title,
   Tooltip,
   SubTitle,
+  ChartData,
 } from 'chart.js';
-import { useEffect } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 
 ChartJS.register(
   ArcElement,
@@ -59,17 +60,10 @@ ChartJS.register(
 
 const StyledLine = styled(Line)`
   padding: 0 2rem;
-  /* width: 100%; */
-  /* min-height: 400px; */
-  /* margin: auto; */
 `;
 
-const UserChart = (props: any) => {
-  useEffect(() => {
-    console.log(props.chartData);
-  }, [props.chartData]);
-  if (!props.chartData) return <></>;
-  return <StyledLine options={options} data={props.chartData}></StyledLine>;
+const UserChart: FunctionComponent<{ chartData: ChartData<'line'> }> = ({ chartData }) => {
+  return <StyledLine options={options} data={chartData}></StyledLine>;
 };
 
 export default UserChart;

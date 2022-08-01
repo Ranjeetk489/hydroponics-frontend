@@ -9,10 +9,17 @@ import { parseCropData } from '../../utils/parseCropData';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { initialData } from '../../utils/chartSettings';
+import { ChartData } from 'chart.js';
+
+interface ImageData {
+  _id: string;
+  imageUrl: string;
+  dateReceived: string;
+}
 
 const UserDashboard = () => {
-  const [cropData, setCropData] = useState([]);
-  const [chartData, setChartData] = useState(initialData);
+  const [imageData, setImageData] = useState<ImageData[]>([]);
+  const [chartData, setChartData] = useState<ChartData<'line'>>(initialData);
   const currentUser = useContext(CurrentUserContext);
   const router = useRouter();
 
@@ -26,11 +33,10 @@ const UserDashboard = () => {
         if (Array.isArray(data)) {
           const imageArray = data.reduce((acc, message) => {
             const { imageUrl, dateReceived } = message;
-            console.log(message);
             if (imageUrl) acc.push({ imageUrl, dateReceived });
             return acc;
           }, []);
-          setCropData(imageArray);
+          setImageData(imageArray);
           const { labels, temperatures, humidities, phs, ecs } = parseCropData(data);
           setChartData({
             labels,
@@ -77,8 +83,8 @@ const UserDashboard = () => {
         <UserChart chartData={chartData}></UserChart>
         <StyledHeader>Image Uploads</StyledHeader>
         <StyledUl>
-          {cropData.map(({ imageUrl, dateReceived }) => (
-            <li key={dateReceived + imageUrl}>
+          {imageData.map(({ _id, imageUrl, dateReceived }) => (
+            <li key={_id + dateReceived}>
               <Image quality={100} objectFit='cover' width={'1600'} height={'900'} src={imageUrl} alt='user uploaded image'></Image>
               <ImageSentDateTag>{dateReceived.slice(0, 10)}</ImageSentDateTag>
             </li>
