@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
-import UserChart from '../../components/UserChart';
+// import UserChart from '../../components/UserChart';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { StyledHeader } from '../../styles/globalstyles';
 
@@ -18,7 +18,7 @@ const AdminDashboard = () => {
       <>
         <Navbar></Navbar>
         <StyledHeader>Admin Dasbhoard</StyledHeader>
-        <UserChart></UserChart>
+        {/* <UserChart></UserChart> */}
       </>
     )
   );

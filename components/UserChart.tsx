@@ -29,7 +29,7 @@ import {
   SubTitle,
   ChartData,
 } from 'chart.js';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 
 ChartJS.register(
   ArcElement,
