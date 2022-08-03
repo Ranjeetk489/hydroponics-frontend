@@ -2,22 +2,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-const LogoWrapper = styled.div`
-  width: 200px;
+const LogoWrapper = styled.h1`
+  width: fit-content;
+  margin: 0;
 
-  @media (max-width: 600px) {
-    width: 120px;
+
+  &::before{
+    content: "•";
+    margin-right: 7px;
   }
 `;
 
 export const MainLogo = () => {
   return (
     <LogoWrapper>
-      <Link href='/' passHref>
+      {/* <Link href='/' passHref>
         <a>
           <Image layout='responsive' width={'355px'} height={'50px'} src='/hydroponics-logowebp.webp' alt='Hydroponics logo'></Image>
         </a>
-      </Link>
+      </Link> */}
+      Hydroponics Network
     </LogoWrapper>
   );
 };

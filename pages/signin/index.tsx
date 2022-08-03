@@ -1,9 +1,11 @@
 import { FormEvent } from 'react';
 import Navbar from '../../components/Navbar';
 import { useInputsAndValidation } from '../../hooks/useInputsAndValidation';
-import { Input, StyledHeader, StyledLabel, SubmitButton } from '../../styles/globalstyles';
+import { Input, StyledHeader, StyledLabel, SubmitButton, FormContainer } from '../../styles/globalstyles';
 import { login as requestLogin } from '../../utils/auth';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import Image from 'next/image';
 
 interface LoginInputs {
   email: string;
@@ -32,22 +34,36 @@ const Signin = (props: any) => {
   return (
     <>
       <Navbar handleLogout={props.handleLogout}></Navbar>
-      <StyledHeader>Log in</StyledHeader>
-      <form onSubmit={handleSubmit} className='form_type_onboarding'>
-        <StyledLabel>
-          Email
-          <Input name='email' value={loginInputs.email || ''} required={true} minLength={2} onChange={handleChange} type='email'></Input>
-        </StyledLabel>
-        <StyledLabel>
-          Phone number
-          <Input name='phoneNumber' value={loginInputs.phoneNumber || ''} required={true} minLength={6} onChange={handleChange} type='tel'></Input>
-        </StyledLabel>
-        <SubmitButton disabled={!isValid} isValid={isValid} type='submit'>
-          Log in
-        </SubmitButton>
-      </form>
+          <FormContainer onSubmit={handleSubmit} className='form_type_onboarding'>
+            <StyledHeader>Welcome back</StyledHeader>
+            <StyledLabel>
+              Email</StyledLabel>
+            <Input name='email' value={loginInputs.email || ''} required={true} minLength={2} onChange={handleChange} type='email' placeholder='Enter your email'></Input>
+            <StyledLabel>
+              Phone number</StyledLabel>
+            <Input name='phoneNumber' value={loginInputs.phoneNumber || ''} required={true} minLength={6} onChange={handleChange} placeholder="Enter your Number" type='tel'></Input>
+              <ForgotPassword>Forgot Password</ForgotPassword>
+            <SubmitButton disabled={!isValid} isValid={isValid} type='submit'>
+              Log in
+            </SubmitButton>
+          </FormContainer>
     </>
   );
 };
 
 export default Signin;
+
+
+
+
+const ForgotPassword = styled.span`
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin:6px 0 1rem 4px;
+  font-weight: 700;
+  color: blue;
+`
+
+
+
+
