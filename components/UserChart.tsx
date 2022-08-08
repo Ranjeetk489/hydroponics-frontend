@@ -58,12 +58,28 @@ ChartJS.register(
   SubTitle
 );
 
+interface ChartProps {
+  chartData: ChartData<'line'>;
+  daysDisplayed: number;
+}
+
 const StyledLine = styled(Line)`
   padding: 0 2rem;
 `;
 
-const UserChart: FunctionComponent<{ chartData: ChartData<'line'> }> = ({ chartData }) => {
-  return <StyledLine options={options} data={chartData}></StyledLine>;
+const DisplayDays = styled.p`
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgb(70, 70, 70);
+`;
+
+const UserChart: FunctionComponent<ChartProps> = ({ chartData, daysDisplayed }) => {
+  return (
+    <>
+      <DisplayDays>Displaying last {daysDisplayed} days of data:</DisplayDays>
+      <StyledLine options={options} data={chartData}></StyledLine>
+    </>
+  );
 };
 
 export default UserChart;
