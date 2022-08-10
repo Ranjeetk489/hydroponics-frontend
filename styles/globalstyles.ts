@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     width: min-content;
     margin: auto;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
 `;
 

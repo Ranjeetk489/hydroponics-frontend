@@ -1,7 +1,7 @@
 import Navbar from '../../components/Navbar';
 import UserChart from '../../components/UserChart';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import { useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { StyledHeader } from '../../styles/globalstyles';
 import { getCropData } from '../../utils/cropData';
@@ -10,6 +10,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { initialData } from '../../utils/chartSettings';
 import { ChartData } from 'chart.js';
+import ChartRangePicker from '../../components/ChartRangePicker';
 
 interface ImageData {
   _id: string;
@@ -20,15 +21,21 @@ interface ImageData {
 const UserDashboard = () => {
   const [imageData, setImageData] = useState<ImageData[]>([]);
   const [chartData, setChartData] = useState<ChartData<'line'>>(initialData);
+  const [chartRange, setChartRange] = useState(28);
   const currentUser = useContext(CurrentUserContext);
   const router = useRouter();
+
+  const handleChartRangeChange = (e: ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    setChartRange(+target.value);
+  };
 
   useEffect(() => {
     if (!currentUser.isLoggedIn) {
       router.replace('/signin');
       return;
     }
-    getCropData(7, currentUser)
+    getCropData(chartRange, currentUser)
       .then((data) => {
         if (Array.isArray(data)) {
           const imageArray = data.reduce((acc, message) => {
@@ -74,13 +81,14 @@ const UserDashboard = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, [router, currentUser]);
+  }, [router, currentUser, chartRange]);
   return (
     currentUser.isLoggedIn && (
       <>
         <Navbar></Navbar>
         <StyledHeader>User Dashboard</StyledHeader>
-        <UserChart chartData={chartData}></UserChart>
+        <ChartRangePicker handleChartRangeChange={handleChartRangeChange} chartRange={chartRange}></ChartRangePicker>
+        <UserChart chartData={chartData} daysDisplayed={chartRange}></UserChart>
         <StyledHeader>Image Uploads</StyledHeader>
         <StyledUl>
           {imageData.map(({ _id, imageUrl, dateReceived }) => (
